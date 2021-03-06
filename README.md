@@ -1,4 +1,5 @@
 # Bifrost Backend REST API 
+[![Build Status](https://travis-ci.org/virajmavani/bifrost-backend.svg?branch=master)](https://travis-ci.org/virajmavani/bifrost-backend)
 
 ## Deployment
 In a shell, navigate to the sample's folder and use the SAM CLI to build a deployable package
