@@ -15,6 +15,7 @@ package com.virajmavani.Bifrost.controller;
 
 import com.virajmavani.Bifrost.model.Query;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.RedirectView;
@@ -28,13 +29,15 @@ import java.util.UUID;
 @RestController
 @EnableWebMvc
 public class SearchController {
+    @CrossOrigin(origins = "*")
     @GetMapping("/bifrost")
     public String helloWorld() {
         return "Heimdall! Open the bifrost!";
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/bifrost/search")
-    public RedirectView search(@RequestBody Query query) {
+    public ResponseEntity<String> search(@RequestBody Query query) {
         List<String> targets = query.getTargets();
         String search_str = query.getSearch_str();
         StringBuilder url = new StringBuilder();
@@ -42,9 +45,8 @@ public class SearchController {
         url.append(" ");
         String filter = String.join(" OR ", targets);
         url.append(filter);
-        RedirectView resp = new RedirectView();
-        resp.setUrl(Globals.GOOGLESEARCH + url.toString().replace(" ", "%20"));
-        return resp;
+        String final_url = Globals.GOOGLESEARCH + url.toString().replace(" ", "%20");
+        return ResponseEntity.ok(final_url);
     }
 
 }
